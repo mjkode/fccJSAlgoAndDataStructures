@@ -1,0 +1,34 @@
+function largestOfFour(arr) {
+
+var arr0 = []; var arr1 =[]; var arrLongest =[];
+var arr0Len = 0; var arr1Len = 0; 
+var loop0 = 0; var loop1 = 0;
+var wordLongest = 0;
+
+arr0 = arr; 
+arr0Len = arr0.length;
+arr1 = arr0[loop0];
+arr1Len = arr1.length;
+
+for(loop0=0; loop0<arr0Len; loop0++){
+  arr1 = arr0[loop0];
+  wordLongest = arr1[0];
+  for(loop1=0; loop1<arr1Len; loop1++){
+    if(arr1[loop1] > wordLongest){
+      wordLongest = arr1[loop1]; 
+    };
+  };
+  
+  arrLongest.push(wordLongest);
+  console.log("---",arrLongest); 
+};
+
+  //arrLongest.push(wordLongest);
+  console.log("---",arrLongest);
+
+  arr=arrLongest;
+  return arr;
+
+}
+
+largestOfFour([[17, 23, 25, 12], [25, 7, 34, 48], [4, -10, 18, 21], [-72, -3, -17, -10]])
