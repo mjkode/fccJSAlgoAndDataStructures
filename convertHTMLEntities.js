@@ -1,30 +1,28 @@
-function convertHTML(str) {
-
-//copy str to newStr
-  var newStr = str.substr(0);
-
-//create HTML Key-Value Pair
-  var htmlKVP={'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":"&apos;"}; 
-
-//create array of Keys and Values 
-  const keys = Object.keys(htmlKVP);
-  const values = Object.values(htmlKVP);
-
-//for each 'key', if 'key' exist in str, replace 'key' with it's 'value'   
-  for(var i=0; i<keys.length; i++){
-    newStr = newStr.split(keys[i]).join(values[i]); 
-  }
+function orbitalPeriod(arr) {
   
-//copy newStr to str     
-  str = newStr;
-    return str;
-}
+// GM (standard gravitational parameter) = gravitational constant (G) * mass (M).
+  var earthGM = 398600.4418;
+  var earthRadius = 6367.4447;
+  var newArr = [];
+
+// function to compute orbital period based on key value pairs (satellite, altitude)  
+  var getOrbitalPeriod = function(obj) {
+// T (orbital period) = 2 * Pi * square-root(earthRadius + average altitude) / earthGM
+    var T = Math.round(2 * Math.PI * Math.sqrt(Math.pow(earthRadius + obj.avgAlt, 3) / earthGM));
+// delete avgAlt property and add orbitalPeriod property   
+    delete obj.avgAlt;
+    obj.orbitalPeriod = T;
+    console.log(T,"secs - ",T/60,"mins - ",T/60/60,"hours - ",T/60/60/24,"days")
+    return obj; 
+  };
  
-convertHTML("Dolce & Gabbana"); 
-convertHTML("Hamburgers < Pizza < Tacos")
-convertHTML("<>");
-convertHTML("Sixty > twelve");
-convertHTML('Stuff in "quotation marks"');
-convertHTML("Schindler's List");
-convertHTML("<>");
-convertHTML("abc");
+ //kvp = Key Value Pair
+  for (var kvp in arr) {
+    newArr.push(getOrbitalPeriod(arr[kvp]));
+  }
+return newArr; 
+
+}
+
+orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
+orbitalPeriod([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {name: "moon", avgAlt: 378632.553}]);
